@@ -160,8 +160,8 @@ const Canvas = ({ backgroundImage, isDrawingMode, shapes, setShapes, setSelected
   return (
     <canvas
       ref={canvasRef}
-      width={600}
-      height={400}
+      width={820}
+      height={540}
       onClick={handleClick}
     />
   );

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import ShapeDrawer from '../ShapeDrawer';
 import Canvas from '../Canvas';
+import './spaces.css';
 
 const Spaces = ({ backgroundImage, isDrawingMode }) => {
 
