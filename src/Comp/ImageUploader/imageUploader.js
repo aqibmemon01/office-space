@@ -1,5 +1,5 @@
 import React from 'react';
-import './imageUploader.css'; 
+import './imageUploader.css';
 
 const ImageUploader = ({ onImageUpload }) => {
   const handleImageUpload = (event) => {
@@ -7,7 +7,7 @@ const ImageUploader = ({ onImageUpload }) => {
     if (file) {
       const reader = new FileReader();
       reader.onload = () => {
-        onImageUpload(reader.result); 
+        onImageUpload(reader.result);
       };
       reader.readAsDataURL(file);
     }

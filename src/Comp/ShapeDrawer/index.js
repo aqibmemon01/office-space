@@ -1,5 +1,5 @@
 import React from 'react';
-import { Drawer, Form, Input, Button } from 'antd';
+import { Drawer } from 'antd';
 import ShapeForm from '../ShapeForm';
 
 

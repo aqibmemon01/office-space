@@ -11,10 +11,10 @@ const Header = ({ onImageUpload, onPenClick, onArrowClick, onUndo, onRedo }) => 
 
       {/* Arrow and Pen buttons */}
       <button className="header-button" onClick={onPenClick} title='Draw'>
-        <img src={penIcon} width={20}/>
+        <img src={penIcon} width={20} />
       </button>
       <button className="header-button" onClick={onArrowClick} title='Move'>
-        <img src={arrowIcon} width={20}/>
+        <img src={arrowIcon} width={20} />
       </button>
 
       {/* <button className="header-button" onClick={onUndo}>Undo</button>

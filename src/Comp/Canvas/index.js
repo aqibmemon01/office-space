@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { drawCircle, drawShape, isFirstPosition, isClickInsideShape } from '../../Utils/canvasUtils';
 
-const Canvas = ({ backgroundImage, isDrawingMode, shapes, setShapes, setSelectedShapeDetails,setFormValues,setDrawerVisible }) => {
+const Canvas = ({ backgroundImage, isDrawingMode, shapes, setShapes, setSelectedShapeDetails, setFormValues, setDrawerVisible }) => {
   const [shapePositions, setShapePositions] = useState(() => {
     const savedPositions = localStorage.getItem('shapePositions');
     return savedPositions ? JSON.parse(savedPositions) : [];
@@ -45,7 +45,7 @@ const Canvas = ({ backgroundImage, isDrawingMode, shapes, setShapes, setSelected
         });
         setDrawerVisible(true); // Open the drawer with shape details
       }
-        return;
+      return;
     }
 
     // Drawing mode logic
@@ -77,7 +77,7 @@ const Canvas = ({ backgroundImage, isDrawingMode, shapes, setShapes, setSelected
 
         setShapePositions([]); // Reset positions for next shape
         saveCurrentShapePositionsToLocalStorage([]); // Clear saved positions in local storage
-        
+
         redrawCanvas(); // Redraw canvas with all shapes
         return [];
       }
@@ -101,14 +101,14 @@ const Canvas = ({ backgroundImage, isDrawingMode, shapes, setShapes, setSelected
         shapes.forEach((shape) => {
           drawShape(ctx, shape.positions);
           shape.positions.forEach((pos) => {
-            drawCircle(canvasRef,pos, pos.index + 1, false);
+            drawCircle(canvasRef, pos, pos.index + 1, false);
           });
         });
 
         if (shapePositions.length > 0) {
           drawShape(ctx, shapePositions);
           shapePositions.forEach((pos, index) => {
-            drawCircle(canvasRef,pos, index === 0 ? pos.index + 1 : pos.index + 1, index === 0);
+            drawCircle(canvasRef, pos, index === 0 ? pos.index + 1 : pos.index + 1, index === 0);
           });
         }
       };
@@ -123,8 +123,9 @@ const Canvas = ({ backgroundImage, isDrawingMode, shapes, setShapes, setSelected
     if (backgroundImage) {
       localStorage.setItem('backgroundImage', backgroundImage);
       setBgImage(backgroundImage);
+      redrawCanvas();
     }
-  }, [backgroundImage]);
+  }, [backgroundImage,bgImage]);
 
   // Cursor management using useEffect for isDrawingMode
   useEffect(() => {
@@ -145,7 +146,7 @@ const Canvas = ({ backgroundImage, isDrawingMode, shapes, setShapes, setSelected
         canvas.style.cursor =
           isOverShapeOrPoint ? 'pointer' : 'default';
       } else {
-        canvas.style.cursor = 'crosshair'; 
+        canvas.style.cursor = 'crosshair';
       }
     };
 
@@ -154,7 +155,7 @@ const Canvas = ({ backgroundImage, isDrawingMode, shapes, setShapes, setSelected
     return () => {
       canvas.removeEventListener('mousemove', handleMouseMove);
     };
-  }, [shapes,isDrawingMode]); 
+  }, [shapes, isDrawingMode]);
 
   return (
     <canvas

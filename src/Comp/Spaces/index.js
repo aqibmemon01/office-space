@@ -3,6 +3,7 @@ import ShapeDrawer from '../ShapeDrawer';
 import Canvas from '../Canvas';
 
 const Spaces = ({ backgroundImage, isDrawingMode }) => {
+
   const [shapePositions, setShapePositions] = useState(() => {
     const savedPositions = localStorage.getItem('shapePositions');
     return savedPositions ? JSON.parse(savedPositions) : [];
@@ -19,7 +20,7 @@ const Spaces = ({ backgroundImage, isDrawingMode }) => {
     height: '',
     birth: '',
   });
-  
+
 
   const [selectedShapeDetails, setSelectedShapeDetails] = useState(null);
   const [drawerVisible, setDrawerVisible] = useState(false);

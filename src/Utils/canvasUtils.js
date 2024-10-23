@@ -3,7 +3,7 @@ export const drawCircle = (canvasRef, position, index, isFirstDot) => {
         console.error("Canvas is not yet rendered or canvasRef is not defined.");
         return;
     }
-    
+
     const ctx = canvasRef.current.getContext('2d');
     if (!ctx) {
         console.error("Failed to get canvas context.");
