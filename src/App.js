@@ -1,11 +1,12 @@
 import React, { useState, useRef } from "react";
 import Header from "./Comp/Header/header";
 import Spaces from "./Comp/Spaces/spaces";
+import CanvasSpaces from "./Comp/Canvas";
 
 function App() {
   const [backgroundImage, setBackgroundImage] = useState(null);
   const [isDrawingMode, setIsDrawingMode] = useState(false);
-  const undoRedoManager = useRef({ undo: () => {}, redo: () => {} });
+  const undoRedoManager = useRef({ undo: () => { }, redo: () => { } });
 
   const handlePenClick = () => {
     setIsDrawingMode(true);
@@ -24,7 +25,12 @@ function App() {
         onPenClick={handlePenClick}
         onArrowClick={handleArrowClick}
       />
-      <Spaces
+      {/* <Spaces
+        backgroundImage={backgroundImage}
+        undoRedoManager={undoRedoManager}
+        isDrawingMode={isDrawingMode}
+      /> */}
+      <CanvasSpaces
         backgroundImage={backgroundImage}
         undoRedoManager={undoRedoManager}
         isDrawingMode={isDrawingMode}
