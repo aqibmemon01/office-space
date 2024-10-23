@@ -1,7 +1,6 @@
 import React, { useState, useRef } from "react";
 import Header from "./Comp/Header/header";
-import Spaces from "./Comp/Spaces/spaces";
-import CanvasSpaces from "./Comp/Canvas";
+import Spaces from "./Comp/Spaces";
 
 function App() {
   const [backgroundImage, setBackgroundImage] = useState(null);
@@ -25,12 +24,7 @@ function App() {
         onPenClick={handlePenClick}
         onArrowClick={handleArrowClick}
       />
-      {/* <Spaces
-        backgroundImage={backgroundImage}
-        undoRedoManager={undoRedoManager}
-        isDrawingMode={isDrawingMode}
-      /> */}
-      <CanvasSpaces
+      <Spaces
         backgroundImage={backgroundImage}
         undoRedoManager={undoRedoManager}
         isDrawingMode={isDrawingMode}
