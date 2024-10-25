@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { drawCircle, drawShape, isFirstPosition, isClickInsideShape } from '../../Utils/canvasUtils';
 
-const Canvas = ({ backgroundImage, isDrawingMode, shapes, setShapes, setSelectedShapeDetails, setFormValues, setDrawerVisible }) => {
+const Canvas = ({ backgroundImage, isDrawingMode, shapes, setShapes, setFormValues, setDrawerVisible }) => {
   const [shapePositions, setShapePositions] = useState(() => {
     const savedPositions = localStorage.getItem('shapePositions');
     return savedPositions ? JSON.parse(savedPositions) : [];
@@ -35,13 +35,13 @@ const Canvas = ({ backgroundImage, isDrawingMode, shapes, setShapes, setSelected
       );
 
       if (clickedShape) {
-        setSelectedShapeDetails(clickedShape);
         setFormValues({
+          ...clickedShape,
           name: clickedShape.name || '',
           description: clickedShape.description || '',
           length: clickedShape.length || '',
           height: clickedShape.height || '',
-          birth: clickedShape.birth || ''
+          birth: clickedShape.birth || '',
         });
         setDrawerVisible(true); // Open the drawer with shape details
       }

@@ -21,22 +21,14 @@ const Spaces = ({ backgroundImage, isDrawingMode }) => {
     height: '',
     birth: '',
   });
-
-
-  const [selectedShapeDetails, setSelectedShapeDetails] = useState(null);
   const [drawerVisible, setDrawerVisible] = useState(false);
 
-  const handleShapeClick = (clickedShape) => {
-    setSelectedShapeDetails(clickedShape);
-    setDrawerVisible(true); // Show the drawer
-  };
-
   const handleSaveShapeDetails = (updatedShape) => {
-    setShapes((prevShapes) =>
-      prevShapes.map((shape) =>
-        shape.id === updatedShape.id ? updatedShape : shape
-      )
+    const updatedShapes = shapes.map((shape) =>
+      shape.id === updatedShape.id ? updatedShape : shape
     );
+    setShapes(updatedShapes);
+    localStorage.setItem('shapes', JSON.stringify(updatedShapes));
     setDrawerVisible(false);
   };
 
@@ -53,7 +45,6 @@ const Spaces = ({ backgroundImage, isDrawingMode }) => {
         setShapePositions={setShapePositions}
         shapes={shapes}
         setShapes={setShapes}
-        setSelectedShapeDetails={handleShapeClick}
         setFormValues={setFormValues}
         setDrawerVisible={setDrawerVisible}
       />
@@ -61,7 +52,7 @@ const Spaces = ({ backgroundImage, isDrawingMode }) => {
         formValues={formValues}
         setFormValues={setFormValues}
         visible={drawerVisible}
-        onSave={handleSaveShapeDetails}
+        onSave={() => handleSaveShapeDetails(formValues)}
         onClose={handleCloseDrawer}
         onCancel={handleCloseDrawer}
       />
