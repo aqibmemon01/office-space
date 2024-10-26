@@ -27,9 +27,8 @@ export const drawShape = (ctx, positions) => {
     ctx.stroke();
 };
 
-export const isClickInsideShape = (clickPos, positions) => {
-    const { minX, minY, maxX, maxY } = calculateBoundingBox(positions);
-    return clickPos.x >= minX && clickPos.x <= maxX && clickPos.y >= minY && clickPos.y <= maxY;
+export const isClickInsideShape = (clickPosition, shapePositions) => {
+    return isPointInPolygon(clickPosition, shapePositions);
 };
 
 export const isFirstPosition = (newPos, firstPos) => {
@@ -37,13 +36,15 @@ export const isFirstPosition = (newPos, firstPos) => {
     return Math.abs(newPos.x - firstPos.x) < tolerance && Math.abs(newPos.y - firstPos.y) < tolerance;
 };
 
-const calculateBoundingBox = (positions) => {
-    let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
-    positions.forEach(({ x, y }) => {
-        if (x < minX) minX = x;
-        if (y < minY) minY = y;
-        if (x > maxX) maxX = x;
-        if (y > maxY) maxY = y;
-    });
-    return { minX, minY, maxX, maxY };
+const isPointInPolygon = (point, polygon) => {
+    let inside = false;
+    for (let i = 0, j = polygon.length - 1; i < polygon.length; j = i++) {
+        const xi = polygon[i].x, yi = polygon[i].y;
+        const xj = polygon[j].x, yj = polygon[j].y;
+
+        const intersect = ((yi > point.y) !== (yj > point.y)) &&
+            (point.x < (xj - xi) * (point.y - yi) / (yj - yi) + xi);
+        if (intersect) inside = !inside;
+    }
+    return inside;
 };
